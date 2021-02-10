@@ -1,21 +1,42 @@
 package com.bullscows;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Short number = 4578;
-        System.out.println("The secret code is prepared: ****.");
+        String code = "4587";
 
-        System.out.println("Turn 1. Answer");
-        System.out.println(1234);
-        System.out.println("Grade: None.");
+        Scanner sc = new Scanner(System.in);
+        String pNum = sc.nextLine();
+        int bulls = 0;
+        int cows = 0;
+        String ans = "None";
 
+        for (int i = 0; i < 4; i++) {
+            if (code.charAt(i) == pNum.charAt(i)) {
+                bulls++;
+                continue;
+            }
+            if (code.contains("" + pNum.charAt(i))) {
+                cows++;
+            }
+        }
 
-        System.out.println("Turn 2. Answer:");
-        System.out.println("9876");
-        System.out.println("Grade: 4 bulls.");
-        System.out.println("Congrats! The secret code is 9876.");
-
+        if (cows != 0 && bulls != 0) {
+            System.out.printf("Grade: %s bull(s) and %s cow(s). The secret code is %s",
+                    bulls,
+                    cows,
+                    code);
+        } else if (cows == 0 && bulls != 0) {
+            System.out.printf("Grade: %s bull(s). The secret code is %s",
+                    bulls,
+                    code);
+        } else if (cows != 0 && bulls == 0) {
+            System.out.printf("Grade: %s cow(s). The secret code is %s",
+                    cows,
+                    code);
+        } else {
+            System.out.println("Grade: None. The secret code is " + code + ".");
+        }
     }
-
-
 }
